@@ -1,0 +1,24 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { SignInData } from './Models/sign-in-data';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+
+  constructor(private http:HttpClient) { }
+  //verify api 
+  verify(token:string){
+    return this.http.put('http://localhost:3000/verify',{token:token});
+  }
+  //login api
+  login(data:SignInData){
+    return this.http.post('http://localhost:3000/login',data);
+  }
+
+  //signup api
+  signUp(data:any){
+    return this.http.post('http://localhost:3000/signup',data);
+  }
+}
