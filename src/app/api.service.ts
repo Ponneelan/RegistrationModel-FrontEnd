@@ -21,4 +21,15 @@ export class ApiService {
   signUp(data:any){
     return this.http.post('http://localhost:3000/signup',data);
   }
+
+  //forgot password api
+  forgotPassword(data:any){
+    return this.http.post('http://localhost:3000/forgotpassword',data);
+  }
+
+  //reset password api
+  resetPassword(data:any){
+    console.log( data);
+    return this.http.put('http://localhost:3000/resetpassword',data);
+  }
 }

@@ -12,6 +12,8 @@ import { ApiService } from './api.service';
 import { SignInData } from './Models/sign-in-data';
 import { SignUpData } from './Models/sign-up-data';
 import { HomeComponent } from './home/home.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { HomeComponent } from './home/home.component';
     SigninComponent,
     VerifyComponent,
     HomeComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     
   ],
   imports: [
