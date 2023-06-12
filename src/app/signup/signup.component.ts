@@ -17,7 +17,10 @@ export class SignupComponent {
     this.error = '';
   }
   signUp(form:NgForm){
-    //validate password and confirm password are same
+    if(form.invalid){
+      this.error = 'Please enter all fields';
+      return;
+    }
     if(form.value.password != form.value.confirmPassword){
       this.error = 'password and confirm password are not same';
       return;

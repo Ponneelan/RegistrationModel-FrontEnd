@@ -16,6 +16,10 @@ export class SigninComponent {
 
   //create function named login
   login(form: NgForm) {
+    if (form.invalid) {
+      this.error = 'Please enter all fields';
+      return;
+    }
     console.log(form.value);
     this.service.login(form.value).subscribe({
       next: (data:any) => {

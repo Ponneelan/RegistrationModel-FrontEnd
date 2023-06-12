@@ -14,6 +14,9 @@ export class ResetPasswordComponent {
   constructor(private route: ActivatedRoute,private router: Router,private service: ApiService) { 
     this.token = this.route.snapshot.queryParamMap.get('token')!;
   }
+  clear() {
+    this.errorMessage = '';
+  }
   resetPassword(form: NgForm) {
     let payload = { newPassword: form.value.newPassword,token:this.token }
     console.log(form.value);
