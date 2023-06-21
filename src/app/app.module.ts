@@ -12,8 +12,9 @@ import { ApiService } from './api.service';
 import { SignInData } from './Models/sign-in-data';
 import { SignUpData } from './Models/sign-up-data';
 import { HomeComponent } from './home/home.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VerifyotpComponent } from './verifyotp/verifyotp.component';
+import { ForgotpasswordwithotpComponent } from './forgotpasswordwithotp/forgotpasswordwithotp.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     SigninComponent,
     VerifyComponent,
     HomeComponent,
-    ForgotPasswordComponent,
     ResetPasswordComponent,
+    VerifyotpComponent,
+    ForgotpasswordwithotpComponent,
     
   ],
   imports: [

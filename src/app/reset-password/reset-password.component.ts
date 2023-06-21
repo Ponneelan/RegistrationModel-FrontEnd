@@ -11,14 +11,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ResetPasswordComponent {
   token: string ;
   errorMessage: string = '';
-  constructor(private route: ActivatedRoute,private router: Router,private service: ApiService) { 
-    this.token = this.route.snapshot.queryParamMap.get('token')!;
+  constructor(private activateRoute: ActivatedRoute,private router: Router,private service: ApiService) { 
+    console.log('.............',this.activateRoute.snapshot.queryParamMap.get('token'));
+    this.token = this.activateRoute.snapshot.queryParamMap.get('token')!;
   }
   clear() {
     this.errorMessage = '';
   }
   resetPassword(form: NgForm) {
-    let payload = { newPassword: form.value.newPassword,token:this.token }
+    let payload = { password: form.value.newPassword,token:this.token }
     console.log(form.value);
     if (form.invalid) {
       this.errorMessage = 'Please enter password';
@@ -31,11 +32,11 @@ export class ResetPasswordComponent {
     this.service.resetPassword(payload).subscribe({
       next: (data: any) => {
         console.log(data);
-        this.errorMessage = 'Password reset successfully';
+        this.router.navigate(['login']);
       },
       error: (err:any) => {
         console.log(err);
-        this.errorMessage = err.error.err;
+        this.errorMessage = err.error.message;
       }
     })
   }

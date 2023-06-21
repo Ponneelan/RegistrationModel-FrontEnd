@@ -24,9 +24,9 @@ export class SigninComponent {
     this.service.login(form.value).subscribe({
       next: (data:any) => {
         console.log('data',data);
+        localStorage.setItem('token',data.token);
         this.router.navigate(['/home']);
         //stroe token in local storage
-        localStorage.setItem('token',data.token);
       },
       error: (err) => {
         console.log('error',err.error);

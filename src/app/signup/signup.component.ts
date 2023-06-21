@@ -27,7 +27,7 @@ export class SignupComponent {
     }
     //call api service
     let payload = {
-      username:form.value.name,
+      name:form.value.name,
       email:form.value.email,
       password:form.value.password,
     }

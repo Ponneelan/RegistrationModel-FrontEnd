@@ -1,0 +1,15 @@
+<div  class="d-flex flex-column align-items-center justify-content-start form-div">
+    <h3>Enter OTP</h3>
+    <form #forgotPasswordForm="ngForm">
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+            {{errorMessage}}
+        </div>
+        <div class="form-group">
+            <input type="email" name="otp" ngModel class="form-control" placeholder="Enter Your OTP" id="email"required (focus)="clear()">
+            <div class="d-flex justify-content-end ali resend-otp">
+                <a (click)="resetOtp()">Resend OTP?</a>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary form-btn" (click)="verifyOtp(forgotPasswordForm.value)">Verify OTP</button>
+    </form>
+</div>
