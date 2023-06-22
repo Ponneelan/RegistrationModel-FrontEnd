@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'app-forgotpasswordwithotp',
@@ -9,20 +10,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./forgotpasswordwithotp.component.scss']
 })
 export class ForgotpasswordwithotpComponent {
-  errorMessage: string = '';
-  constructor(private service: ApiService, private router: Router, private activateRouter: ActivatedRoute) { }
-
+  constructor(private service: ApiService, private router: Router, private activateRouter: ActivatedRoute, private helperService:HelperService) { }
   clear() {
-    this.errorMessage = '';
   }
   sentForgotPasswordLink(form: NgForm) {
     console.log('forgot password ',form.value);
     if (form.invalid) {
-      this.errorMessage = 'Please enter email';
+      this.helperService.errorToast('Please enter email');
       return;
     }
     if (form.value.email === '') {
-      this.errorMessage = 'Please enter email';
+      this.helperService.errorToast('Please enter email');
       return;
     }
     this.service.forgotPassword(form.value.email).subscribe({
@@ -35,7 +33,7 @@ export class ForgotpasswordwithotpComponent {
       },
       error: (err) => {
         console.log(err);
-        this.errorMessage = err.error.err;
+        this.helperService.errorToast(err?.error?.message);
       }
     })
   }

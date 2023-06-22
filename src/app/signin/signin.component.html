@@ -2,9 +2,6 @@
     <div class="col-6 d-flex flex-column align-items-center justify-content-center form-div">
         <form #signInForm="ngForm">
             <h1 id="title">Login</h1>
-            <div style="padding: 10px;" class="alert alert-danger" *ngIf="error">
-                {{error}}
-            </div>
             <div class="input-feilds form-group">
                 <!-- <label class="icon"><i class="bi bi-person-fill"></i></label> -->
                 <div class="input-group">
@@ -41,3 +38,5 @@
         <img src="https://raw.githubusercontent.com/Ponneelan/Simple-Registration/main/Client/SignIn/draw1.webp" alt="">
     </div>
 </div>
+
+<p-toast></p-toast>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'app-verifyotp',
@@ -9,8 +10,7 @@ import { ApiService } from '../api.service';
 })
 export class VerifyotpComponent implements OnInit {
   token:string = '';
-  errorMessage: string = '';
-  constructor(private activateRouter: ActivatedRoute, private router: Router, private service:ApiService) { }
+  constructor(private activateRouter: ActivatedRoute, private router: Router, private service:ApiService, private helperServive:HelperService) { }
   ngOnInit(): void {
     this.activateRouter.queryParams.subscribe((params) => {
       console.log('.........token............', params['token']);
@@ -28,23 +28,22 @@ export class VerifyotpComponent implements OnInit {
         }
       },
       error:(error:any)=>{
-        this.errorMessage = error?.error?.message;
+        this.helperServive.errorToast(error?.error?.message)
       }
     })
   }
   clear() {
-    this.errorMessage = '';
   }
   resetOtp(){
     this.service.resedOTP(this.token).subscribe({
       next:(data:any)=>{
         if(data.status){
-          this.errorMessage = data.message;
+        this.helperServive.successToast(data.message);
         }
       },
       error:(error:any)=>{
         console.log(error);
-        this.errorMessage = error.error.message
+        this.helperServive.errorToast(error.error.message);
       }
     });
   }

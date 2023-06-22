@@ -3,7 +3,7 @@ import { SignUpData } from '../Models/sign-up-data';
 import { NgForm } from "@angular/forms";
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
-
+import { HelperService } from '../helper.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -11,18 +11,16 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
   user:SignUpData = new SignUpData('','','','',false);
-  error:string = '';
-  constructor(private service:ApiService,private router:Router) { }
+  constructor(private service:ApiService,private router:Router, private helperService:HelperService) { }
   clear(){
-    this.error = '';
   }
   signUp(form:NgForm){
     if(form.invalid){
-      this.error = 'Please enter all fields';
+      this.helperService.errorToast('Please enter all fields');
       return;
     }
     if(form.value.password != form.value.confirmPassword){
-      this.error = 'password and confirm password are not same';
+      this.helperService.errorToast('password and confirm password are not same');
       return;
     }
     //call api service
@@ -34,12 +32,12 @@ export class SignupComponent {
     this.service.signUp(payload).subscribe({
       next:(data:any)=>{
         console.log(data);
-        this.error = data.success;
+        this.helperService.successToast(data.message);
         form.reset();
-      }
-      ,error:(err:any)=>{
+      },
+      error:(err:any)=>{
         console.log(err.error);
-        this.error = err.error.err;
+        this.helperService.errorToast(err.error.message);
       }
     });
   }
